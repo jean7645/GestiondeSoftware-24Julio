@@ -1,0 +1,18 @@
+trabajar con un new branch(nueva rama)
+
+actualizar cambios en GitHub:
+desde linea de comandos preferentemente
+git status
+git add .
+git commit -m "cambios en archivo prueba"
+git pull origin main (primero actualizar antes de subir un archivo a push)
+git push -u origin main
+
+pull request y fork y ssh con GitHub 31 julio
+
+"PRACTICA DE FORK Y PULL REQUEST"
+7 DE AGOSTO Y 14 DE AGOSTO
+
+"TAG´S" (Elementos o leyendas, son etiquetas)
+git tag v3.0.1
+git tag -a v1.0.0 elnumerodeloslog -m "tag inicial que olvidamos"
