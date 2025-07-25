@@ -1,0 +1,190 @@
+trabajar con SSH en GitHub es una excelente práctica para mantener una conexión segura entre tu computadora y GitHub sin tener que ingresar tu usuario y contraseña cada vez que haces push o pull.
+
+ ¿Qué es SSH y para qué se usa en GitHub?
+SSH (Secure Shell) se utiliza para establecer una conexión segura y autenticada entre tu máquina y GitHub. Al usar una llave SSH, puedes:
+
+Hacer git push y git pull sin escribir tu usuario/contraseña.
+
+
+✅ Paso 1: Crear una nueva clave SSH
+En tu terminal (Git Bash), ejecuta:
+
+bash
+Copiar
+Editar
+ssh-keygen -t rsa -b 4096 -C "tu_correo@ejemplo.com"
+🔁 Reemplaza "tu_correo@ejemplo.com" con el correo que usas en GitHub.
+
+Cuando te aparezcan estos mensajes:
+
+bash
+Copiar
+Editar
+Enter file in which to save the key (/c/Users/Usuario/.ssh/id_rsa):
+Presiona Enter para aceptar la ruta por defecto.
+
+Luego:
+
+nginx
+Copiar
+Editar
+Enter passphrase (empty for no passphrase):
+Puedes dejarlo vacío presionando Enter, o escribir una contraseña (más seguro, pero te la pedirá en cada uso a menos que uses ssh-agent).
+
+✅ Paso 2: Verifica que se generó correctamente
+Después de eso, escribe:
+
+bash
+Copiar
+Editar
+ls ~/.ssh
+Deberías ver ahora:
+
+rust
+Copiar
+Editar
+id_rsa      id_rsa.pub      known_hosts
+
+
+✅ Paso 3: Copiar tu clave pública
+En la terminal, escribe:
+
+bash
+Copiar
+Editar
+cat ~/.ssh/id_rsa.pub
+Verás algo parecido a:
+
+css
+Copiar
+Editar
+ssh-rsa AAAAB3... [tu-correo@ejemplo.com]
+🔗 Selecciona y copia todo ese texto, desde ssh-rsa hasta el final.
+
+✅ Paso 4: Agregar la clave SSH a GitHub
+Abre este enlace directo a tus llaves SSH en GitHub.
+
+Haz clic en New SSH key.
+
+Completa los campos:
+
+Title: Algo descriptivo, como Mi Laptop Erick
+
+Key: Pega aquí el contenido que copiaste del paso anterior
+
+Haz clic en Add SSH key.
+
+✅ Paso 5: Probar la conexión SSH
+De vuelta en la terminal, ejecuta:
+
+bash
+Copiar
+Editar
+ssh -T git@github.com
+La primera vez te puede salir esto:
+
+rust
+Copiar
+Editar
+The authenticity of host 'github.com (IP...)' can't be established.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+Escribe:
+
+bash
+Copiar
+Editar
+yes
+Luego deberías ver algo como:
+
+vbnet
+Copiar
+Editar
+Hi tu-usuario! You've successfully authenticated, but GitHub does not provide shell access.
+✅ ¡Listo! Ya puedes usar GitHub con SSH.
+
+¿Probamos clonando un repositorio con SSH?
+Puedo ayudarte a crear uno de prueba si quieres, o puedes ir a cualquier repo tuyo en GitHub, presionar el botón Code > selecciona SSH y copia la URL tipo:
+
+scss
+Copiar
+Editar
+git@github.com:tu-usuario/nombre-repo.git
+Y luego ejecutas en tu terminal:
+
+bash
+Copiar
+Editar
+git clone git@github.com:tu-usuario/nombre-repo.git
+
+✅ Comando correcto para clonar con SSH:
+Primero asegúrate de copiar correctamente la URL SSH de tu repositorio desde GitHub.
+
+En tu caso, deberías usar:
+
+bash
+Copiar
+Editar
+git clone git@github.com:jean7645/GestiondeSoftware-24Julio.git
+🔁 El comando siempre empieza con git clone, seguido de la URL SSH.
+
+🚀 Prueba en tu terminal:
+bash
+Copiar
+Editar
+cd ~/OneDrive/Documentos/erick\ git/
+git clone git@github.com:jean7645/GestiondeSoftware-24Julio.git
+Esto descargará el repositorio en una carpeta llamada GestiondeSoftware-24Julio.
+ChatGPT Plus
+¡Perfecto! Vamos a hacer una prueba completa con git push y git pull usando SSH. Aquí están los pasos ordenados para no perder nada:
+
+✅ Paso 1: Entra al repositorio clonado
+Si ya hiciste el git clone, ahora entra a la carpeta:
+
+bash
+Copiar
+Editar
+cd GestiondeSoftware-24Julio
+Verifica que estás dentro del repositorio con:
+
+bash
+Copiar
+Editar
+git status
+✅ Paso 2: Crear un archivo de prueba
+Vamos a crear un archivo sencillo como prueba, por ejemplo:
+
+bash
+Copiar
+Editar
+echo "Prueba SSH desde Erick" > prueba-ssh.txt
+Confirma que se creó:
+
+bash
+Copiar
+Editar
+ls
+✅ Paso 3: Agregar, confirmar y hacer push
+bash
+Copiar
+Editar
+git add prueba-ssh.txt
+git commit -m "Agregando archivo de prueba SSH"
+git push origin main
+☝️ Si tu rama principal se llama master en lugar de main, reemplaza main por master.
+
+Si todo está bien, el push se realizará sin pedirte usuario y contraseña, y GitHub recibirá el archivo.
+
+✅ Paso 4: Confirmar en GitHub
+Ve a tu repositorio en https://github.com/jean7645/GestiondeSoftware-24Julio y verifica si aparece el archivo prueba-ssh.txt.
+
+✅ Paso 5: Prueba de git pull
+En caso quieras simular un pull, puedes borrar el archivo localmente y volverlo a descargar con:
+
+bash
+Copiar
+Editar
+rm prueba-ssh.txt
+git pull origin main
+Debería descargar nuevamente el archivo desde GitHub.
+
+
